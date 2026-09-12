@@ -1,0 +1,43 @@
+========================================
+ AGENTVAULT V1.1 - RELEASE CANDIDATE RC1
+========================================
+
+Freeze Time:
+2026-09-12 18:29:31
+
+Source:
+contracts/AgentVaultV11.sol
+
+Frozen Copy:
+contracts/AgentVaultV11.RC1.sol.freeze
+
+SHA256 SOURCE:
+7AF62A62F835067D4022E9E5236D6D98F2E461066CC6A5E2798515BF846D30C1
+
+SHA256 FROZEN COPY:
+7AF62A62F835067D4022E9E5236D6D98F2E461066CC6A5E2798515BF846D30C1
+
+SECURITY STATUS
+----------------------------------------
+Core / Security / Adversarial : PASS
+ERC20 Generic Bypass          : BLOCKED
+Failure & Rollback Suite      : 7/7 PASS
+Full Regression               : PASS
+
+BYTECODE
+----------------------------------------
+Creation Bytecode : 24446 bytes
+Runtime Bytecode  : 23487 bytes
+EIP-170 Limit     : 24576 bytes
+Remaining Margin  : 1089 bytes
+Runtime Usage     : 95.57%
+Local Deploy Gas  : 5248752
+
+STATUS:
+AGENTVAULT V1.1 RC1 - SOURCE FROZEN
+
+IMPORTANT:
+Do not modify AgentVaultV11.sol after this freeze.
+Any source modification requires a new RC version
+and complete regression/security testing.
+========================================

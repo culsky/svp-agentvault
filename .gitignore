@@ -1,0 +1,42 @@
+# Secrets / environment
+.env
+.env.*
+!.env.example
+
+# Private keys / wallets / keystores
+*private-key*
+*private_key*
+*secret*
+*secrets*
+*keystore*
+wallets.json
+wallet.json
+
+# Hardhat local secrets
+hardhat-keystore.json
+
+# Dependencies
+node_modules/
+
+# Build / cache
+cache/
+coverage/
+dist/
+
+# Logs
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local agent runtime data
+agent/queue/
+agent/logs/
+agent/test-temp/
+agent/ai-provider/live/
+
+# Never publish local release scratch
+release/

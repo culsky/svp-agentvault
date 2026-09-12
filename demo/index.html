@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SVP AgentVault — AI Treasury Agent Demo</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    background:
+        radial-gradient(circle at 85% 0%, rgba(32,111,170,.25), transparent 30%),
+        radial-gradient(circle at 5% 25%, rgba(20,132,99,.13), transparent 25%),
+        #07111f;
+
+    color: #e9f3ff;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.container {
+    width: min(1240px, calc(100% - 32px));
+    margin: auto;
+    padding: 34px 0 70px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 18px;
+}
+
+.brand {
+    font-weight: 800;
+    letter-spacing: .04em;
+}
+
+.network {
+    color: #8da4bc;
+    font-size: 13px;
+}
+
+.hero {
+    border: 1px solid #294661;
+    background: rgba(11,28,47,.93);
+    border-radius: 22px;
+    padding: 34px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin-bottom: 16px;
+}
+
+.badge {
+    padding: 7px 11px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .08em;
+}
+
+.green {
+    background: #10392f;
+    color: #82f0bd;
+}
+
+.blue {
+    background: #102f4c;
+    color: #8dccff;
+}
+
+.yellow {
+    background: #443817;
+    color: #ffd66d;
+}
+
+h1 {
+    font-size: clamp(36px, 6vw, 62px);
+    line-height: 1;
+    margin: 0 0 14px;
+}
+
+.hero p {
+    max-width: 870px;
+    color: #a2b6ca;
+    font-size: 17px;
+    line-height: 1.65;
+}
+
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.button {
+    padding: 11px 16px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    border: 1px solid #335775;
+    background: #10283f;
+}
+
+.button.primary {
+    background: #14745c;
+    border-color: #278e72;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(210px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card {
+    background: rgba(11,28,47,.92);
+    border: 1px solid #263f59;
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.label {
+    color: #8098b1;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.value {
+    font-size: 24px;
+    font-weight: 800;
+    margin-top: 8px;
+}
+
+.pass {
+    color: #70edb5;
+}
+
+.warn {
+    color: #ffd46d;
+}
+
+.section {
+    margin-top: 25px;
+}
+
+.section-title {
+    font-size: 22px;
+    margin: 0 0 14px;
+}
+
+.pipeline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.step {
+    background: #10273e;
+    border: 1px solid #2b4966;
+    border-radius: 10px;
+    padding: 9px 12px;
+    font-size: 13px;
+}
+
+.arrow {
+    color: #607a94;
+}
+
+.two-col {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(330px, 1fr));
+    gap: 18px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 11px 0;
+    border-bottom: 1px solid #20364d;
+}
+
+.row:last-child {
+    border-bottom: 0;
+}
+
+.row .name {
+    color: #849db7;
+}
+
+.mono {
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+    font-size: 12px;
+    word-break: break-all;
+    text-align: right;
+}
+
+.proof-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(250px, 1fr));
+    gap: 12px;
+}
+
+.proof {
+    background: #0d2338;
+    border: 1px solid #27435f;
+    padding: 16px;
+    border-radius: 12px;
+    line-height: 1.55;
+}
+
+.proof strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.note {
+    color: #91a8bf;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.hash {
+    font-family:
+        Consolas,
+        "Courier New",
+        monospace;
+    font-size: 12px;
+    word-break: break-all;
+}
+
+.footer {
+    margin-top: 28px;
+    border-top: 1px solid #20364d;
+    padding-top: 20px;
+    color: #6f869e;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+@media(max-width:650px) {
+    .hero {
+        padding: 24px 19px;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .mono {
+        text-align: left;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="topbar">
+    <div class="brand">
+        SVP AGENTVAULT
+    </div>
+
+    <div class="network">
+        SVPChain Testnet · Chain ID 2517
+    </div>
+</div>
+
+<section class="hero">
+
+<div class="badges">
+
+<span class="badge green">
+LIVE TESTNET RC
+</span>
+
+<span class="badge green">
+32 / 32 LIVE GATES PASS
+</span>
+
+<span class="badge blue">
+EXACT MATCH SOURCE
+</span>
+
+<span class="badge yellow">
+HUMAN APPROVAL REQUIRED
+</span>
+
+</div>
+
+<h1>
+AI proposes.<br>
+Policy decides.
+</h1>
+
+<p>
+SVP AgentVault demonstrates an AI-assisted treasury
+execution architecture where external AI can propose
+actions but cannot directly control treasury assets.
+Deterministic smart-contract policy, authenticated
+agent execution, simulation, human approval and
+post-execution auditing remain in control.
+</p>
+
+<div class="actions">
+
+<a
+class="button primary"
+href="https://explorer.svpchain.com/address/0xcd6D4333BcB56c226192a478dA2d9261FdA78953"
+target="_blank"
+rel="noopener noreferrer">
+View Verified Contract
+</a>
+
+<a
+class="button"
+href="https://explorer.svpchain.com/tx/0x16cd9db37b7d679680a1434174f62fdbec8477b552c58cd6101f61836f22243c"
+target="_blank"
+rel="noopener noreferrer">
+View Live Execution TX
+</a>
+
+</div>
+
+</section>
+
+<div class="grid">
+
+<div class="card">
+<div class="label">Vault Status</div>
+<div id="status" class="value pass">—</div>
+</div>
+
+<div class="card">
+<div class="label">Vault Balance</div>
+<div id="balance" class="value">—</div>
+</div>
+
+<div class="card">
+<div class="label">Max / TX</div>
+<div id="maxTx" class="value">—</div>
+</div>
+
+<div class="card">
+<div class="label">Daily Limit</div>
+<div id="dailyLimit" class="value">—</div>
+</div>
+
+<div class="card">
+<div class="label">Spent Today</div>
+<div id="spent" class="value">—</div>
+</div>
+
+<div class="card">
+<div class="label">Decision Nonce</div>
+<div id="nonce" class="value">—</div>
+</div>
+
+<div class="card">
+<div class="label">Live Gates</div>
+<div id="gates" class="value pass">—</div>
+</div>
+
+<div class="card">
+<div class="label">Execution</div>
+<div class="value pass">
+CONFIRMED
+</div>
+</div>
+
+</div>
+
+<section class="card section">
+
+<h2 class="section-title">
+Execution Pipeline
+</h2>
+
+<div class="pipeline">
+
+<div class="step">Gemini</div>
+<div class="arrow">→</div>
+
+<div class="step">Schema Validation</div>
+<div class="arrow">→</div>
+
+<div class="step">Policy Gate</div>
+<div class="arrow">→</div>
+
+<div class="step">Sealed Queue</div>
+<div class="arrow">→</div>
+
+<div class="step">EIP-712</div>
+<div class="arrow">→</div>
+
+<div class="step">Live Preflight</div>
+<div class="arrow">→</div>
+
+<div class="step">Static Simulation</div>
+<div class="arrow">→</div>
+
+<div class="step">Human Approval</div>
+<div class="arrow">→</div>
+
+<div class="step">Agent Execute</div>
+<div class="arrow">→</div>
+
+<div class="step">Audit</div>
+
+</div>
+
+</section>
+
+<section class="two-col section">
+
+<div class="card">
+
+<h2 class="section-title">
+Authority Model
+</h2>
+
+<div class="row">
+<span class="name">Owner</span>
+<span id="owner" class="mono"></span>
+</div>
+
+<div class="row">
+<span class="name">Dedicated Agent</span>
+<span id="agent" class="mono"></span>
+</div>
+
+<div class="row">
+<span class="name">Guardian</span>
+<span id="guardian" class="mono"></span>
+</div>
+
+<div class="row">
+<span class="name">AI Authority</span>
+<span class="pass"><strong>NONE</strong></span>
+</div>
+
+<div class="row">
+<span class="name">Human Approval</span>
+<span class="warn"><strong>REQUIRED</strong></span>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2 class="section-title">
+Confirmed Execution
+</h2>
+
+<div class="row">
+<span class="name">Function</span>
+<span id="fn"></span>
+</div>
+
+<div class="row">
+<span class="name">Value</span>
+<span id="value"></span>
+</div>
+
+<div class="row">
+<span class="name">Block</span>
+<span id="block"></span>
+</div>
+
+<div class="row">
+<span class="name">Gas Used</span>
+<span id="gas"></span>
+</div>
+
+<div class="row">
+<span class="name">Decision</span>
+<span id="decisionState" class="pass"></span>
+</div>
+
+</div>
+
+</section>
+
+<section class="card section">
+
+<h2 class="section-title">
+Transaction Evidence
+</h2>
+
+<div class="row">
+<span class="name">Transaction</span>
+<span id="tx" class="mono"></span>
+</div>
+
+<div class="row">
+<span class="name">Sender</span>
+<span id="sender" class="mono"></span>
+</div>
+
+<div class="row">
+<span class="name">Vault</span>
+<span id="vault" class="mono"></span>
+</div>
+
+<div class="row">
+<span class="name">Decision Hash</span>
+<span id="decision" class="mono"></span>
+</div>
+
+</section>
+
+<section class="card section">
+
+<h2 class="section-title">
+What This Demonstrates
+</h2>
+
+<div class="proof-grid">
+
+<div class="proof">
+<strong class="pass">
+✓ External AI Integration
+</strong>
+Gemini produced a structured treasury proposal.
+</div>
+
+<div class="proof">
+<strong class="pass">
+✓ AI Has No Treasury Authority
+</strong>
+AI is treated as an untrusted proposal source.
+</div>
+
+<div class="proof">
+<strong class="pass">
+✓ Deterministic Policy Enforcement
+</strong>
+Execution remains bounded by AgentVault policy.
+</div>
+
+<div class="proof">
+<strong class="pass">
+✓ Dedicated Agent Authentication
+</strong>
+Execution authorization uses EIP-712 binding.
+</div>
+
+<div class="proof">
+<strong class="pass">
+✓ Replay Protection
+</strong>
+Decision nonce advanced and decision hash was consumed.
+</div>
+
+<div class="proof">
+<strong class="pass">
+✓ Verifiable Execution
+</strong>
+The transaction was confirmed on SVPChain testnet.
+</div>
+
+</div>
+
+</section>
+
+<section class="card section">
+
+<h2 class="section-title">
+What This Does Not Claim
+</h2>
+
+<div class="proof-grid">
+
+<div class="proof">
+<strong class="warn">
+Not an Independent Audit
+</strong>
+Exact source verification and passing tests are not
+equivalent to third-party security review.
+</div>
+
+<div class="proof">
+<strong class="warn">
+Not Unsupervised Autonomy
+</strong>
+The current execution pipeline intentionally requires
+explicit human approval.
+</div>
+
+<div class="proof">
+<strong class="warn">
+Not Production Key Custody
+</strong>
+Roles are logically separated, but current development
+keys are still operated from the same development
+machine environment.
+</div>
+
+<div class="proof">
+<strong class="warn">
+Testnet Release Candidate
+</strong>
+The demonstrated system remains a testnet RC.
+</div>
+
+</div>
+
+</section>
+
+<section class="two-col section">
+
+<div class="card">
+
+<h2 class="section-title">
+Evidence Integrity
+</h2>
+
+<div class="label">
+V0.7 Baseline SHA-256
+</div>
+
+<p
+id="v07"
+class="hash">
+</p>
+
+<div class="label">
+V0.8 Evidence Package SHA-256
+</div>
+
+<p
+id="v08"
+class="hash">
+</p>
+
+</div>
+
+<div class="card">
+
+<h2 class="section-title">
+Snapshot
+</h2>
+
+<div class="row">
+<span class="name">Generated</span>
+<span id="generated"></span>
+</div>
+
+<div class="row">
+<span class="name">Latest block at snapshot</span>
+<span id="latestBlock"></span>
+</div>
+
+<div class="row">
+<span class="name">Snapshot gates</span>
+<span id="snapshotGates" class="pass"></span>
+</div>
+
+<div class="row">
+<span class="name">Source verification</span>
+<span class="pass">EXACT MATCH</span>
+</div>
+
+</div>
+
+</section>
+
+<div class="footer">
+
+<strong>SVP AgentVault V1.1 RC1</strong>
+
+<br>
+
+Public reviewer dashboard generated from the
+cryptographically recorded V0.8B-R2 testnet snapshot.
+
+<br>
+
+AI remains an untrusted proposal source.
+Human approval is required.
+Independent security review is still recommended
+before production deployment.
+
+</div>
+
+</div>
+
+<script id="snapshot" type="application/json">
+{
+  "schema": "AgentVault-DemoStatus-v0.8B-R2",
+  "generatedAt": "2026-09-12T15:11:59.553Z",
+  "network": {
+    "name": "SVPChain Testnet",
+    "chainId": 2517,
+    "latestBlock": 7000936
+  },
+  "vault": {
+    "address": "0xcd6D4333BcB56c226192a478dA2d9261FdA78953",
+    "runtimeBytes": 23487,
+    "owner": "0x1110AC0B518C76C7613326f0663bBC8702E09453",
+    "agent": "0x83058883873b35CbDF15f0EADb73731b30b272D5",
+    "guardian": "0x81b3BA62Dc32e98B6b82CAbAEA40E0F9097B976D",
+    "paused": false,
+    "decisionNonce": "5"
+  },
+  "policy": {
+    "getters": {
+      "maxPerTx": "maxPerTx",
+      "dailyLimit": "dailyLimit",
+      "spentToday": "spentToday"
+    },
+    "maxPerTxSVP": "0.05",
+    "dailyLimitSVP": "0.2",
+    "spentTodaySVP": "0.009",
+    "remainingDailySVP": "0.191",
+    "vaultBalanceSVP": "0.001"
+  },
+  "ai": {
+    "provider": "Gemini",
+    "authority": "NONE",
+    "trust": "UNTRUSTED_PROPOSAL_SOURCE",
+    "authentication": "EIP-712",
+    "manualApprovalRequired": true
+  },
+  "execution": {
+    "transactionHash": "0x16cd9db37b7d679680a1434174f62fdbec8477b552c58cd6101f61836f22243c",
+    "from": "0x83058883873b35CbDF15f0EADb73731b30b272D5",
+    "to": "0xcd6D4333BcB56c226192a478dA2d9261FdA78953",
+    "blockNumber": 7000648,
+    "gasUsed": "92731",
+    "decodedFunction": "execute",
+    "target": "0x1110AC0B518C76C7613326f0663bBC8702E09453",
+    "valueSVP": "0.001",
+    "data": "0x",
+    "decisionHash": "0xfe0dbdef5da7d9538129da4a3c449f4ded20623f5ac21e7e22fbbf05495b28f4",
+    "decisionConsumed": true
+  },
+  "evidence": {
+    "v07BaselineManifestSHA256": "BEED75A8E349CD45C0367F61D077BF7DE864645EC189AC4BD51799BA0B654677",
+    "v08PackageManifestSHA256": "063727BFA859181ABA4158A572AD82612D3C21149242456A564E7A485DEC76BA",
+    "postExecutionAudit": "PASS_20_OF_20"
+  },
+  "securityStatus": {
+    "release": "TESTNET_RC",
+    "sourceVerification": "EXACT_MATCH",
+    "independentAudit": false,
+    "autonomousUnsupervisedExecution": false
+  },
+  "gates": {
+    "total": 32,
+    "passed": 32,
+    "failed": 0
+  }
+}
+
+</script>
+
+<script>
+
+const data = JSON.parse(
+    document.getElementById("snapshot").textContent
+);
+
+const set = (id, value) => {
+    document.getElementById(id).textContent = value;
+};
+
+set(
+    "status",
+    data.vault.paused ? "PAUSED" : "ACTIVE"
+);
+
+set(
+    "balance",
+    data.policy.vaultBalanceSVP + " SVP"
+);
+
+set(
+    "maxTx",
+    data.policy.maxPerTxSVP + " SVP"
+);
+
+set(
+    "dailyLimit",
+    data.policy.dailyLimitSVP + " SVP"
+);
+
+set(
+    "spent",
+    data.policy.spentTodaySVP + " SVP"
+);
+
+set(
+    "nonce",
+    data.vault.decisionNonce
+);
+
+set(
+    "gates",
+    data.gates.passed + "/" + data.gates.total
+);
+
+set("owner", data.vault.owner);
+set("agent", data.vault.agent);
+set("guardian", data.vault.guardian);
+
+set(
+    "fn",
+    data.execution.decodedFunction
+);
+
+set(
+    "value",
+    data.execution.valueSVP + " SVP"
+);
+
+set(
+    "block",
+    data.execution.blockNumber
+);
+
+set(
+    "gas",
+    data.execution.gasUsed
+);
+
+set(
+    "decisionState",
+    data.execution.decisionConsumed
+        ? "CONSUMED"
+        : "NOT CONSUMED"
+);
+
+set(
+    "tx",
+    data.execution.transactionHash
+);
+
+set(
+    "sender",
+    data.execution.from
+);
+
+set(
+    "vault",
+    data.execution.to
+);
+
+set(
+    "decision",
+    data.execution.decisionHash
+);
+
+set(
+    "v07",
+    data.evidence.v07BaselineManifestSHA256
+);
+
+set(
+    "v08",
+    data.evidence.v08PackageManifestSHA256
+);
+
+set(
+    "generated",
+    new Date(data.generatedAt).toLocaleString()
+);
+
+set(
+    "latestBlock",
+    data.network.latestBlock
+);
+
+set(
+    "snapshotGates",
+    data.gates.passed +
+    " PASS / " +
+    data.gates.failed +
+    " FAIL"
+);
+
+</script>
+
+</body>
+</html>

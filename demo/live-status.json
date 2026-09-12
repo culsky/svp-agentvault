@@ -1,0 +1,66 @@
+{
+  "schema": "AgentVault-DemoStatus-v0.8B-R2",
+  "generatedAt": "2026-09-12T15:11:59.553Z",
+  "network": {
+    "name": "SVPChain Testnet",
+    "chainId": 2517,
+    "latestBlock": 7000936
+  },
+  "vault": {
+    "address": "0xcd6D4333BcB56c226192a478dA2d9261FdA78953",
+    "runtimeBytes": 23487,
+    "owner": "0x1110AC0B518C76C7613326f0663bBC8702E09453",
+    "agent": "0x83058883873b35CbDF15f0EADb73731b30b272D5",
+    "guardian": "0x81b3BA62Dc32e98B6b82CAbAEA40E0F9097B976D",
+    "paused": false,
+    "decisionNonce": "5"
+  },
+  "policy": {
+    "getters": {
+      "maxPerTx": "maxPerTx",
+      "dailyLimit": "dailyLimit",
+      "spentToday": "spentToday"
+    },
+    "maxPerTxSVP": "0.05",
+    "dailyLimitSVP": "0.2",
+    "spentTodaySVP": "0.009",
+    "remainingDailySVP": "0.191",
+    "vaultBalanceSVP": "0.001"
+  },
+  "ai": {
+    "provider": "Gemini",
+    "authority": "NONE",
+    "trust": "UNTRUSTED_PROPOSAL_SOURCE",
+    "authentication": "EIP-712",
+    "manualApprovalRequired": true
+  },
+  "execution": {
+    "transactionHash": "0x16cd9db37b7d679680a1434174f62fdbec8477b552c58cd6101f61836f22243c",
+    "from": "0x83058883873b35CbDF15f0EADb73731b30b272D5",
+    "to": "0xcd6D4333BcB56c226192a478dA2d9261FdA78953",
+    "blockNumber": 7000648,
+    "gasUsed": "92731",
+    "decodedFunction": "execute",
+    "target": "0x1110AC0B518C76C7613326f0663bBC8702E09453",
+    "valueSVP": "0.001",
+    "data": "0x",
+    "decisionHash": "0xfe0dbdef5da7d9538129da4a3c449f4ded20623f5ac21e7e22fbbf05495b28f4",
+    "decisionConsumed": true
+  },
+  "evidence": {
+    "v07BaselineManifestSHA256": "BEED75A8E349CD45C0367F61D077BF7DE864645EC189AC4BD51799BA0B654677",
+    "v08PackageManifestSHA256": "063727BFA859181ABA4158A572AD82612D3C21149242456A564E7A485DEC76BA",
+    "postExecutionAudit": "PASS_20_OF_20"
+  },
+  "securityStatus": {
+    "release": "TESTNET_RC",
+    "sourceVerification": "EXACT_MATCH",
+    "independentAudit": false,
+    "autonomousUnsupervisedExecution": false
+  },
+  "gates": {
+    "total": 32,
+    "passed": 32,
+    "failed": 0
+  }
+}
