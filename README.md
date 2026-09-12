@@ -98,3 +98,16 @@ NO
 Exact source verification and successful testing are not equivalent to an independent security audit.
 
 Production use should include independent review, hardened signer infrastructure, operational key isolation, monitoring, and incident-response procedures.
+
+## Verified Testnet Deployment
+
+SVP AgentVault V1.1 RC1 is deployed on SVPChain Testnet.
+
+- Network: SVPChain Testnet
+- Chain ID: 2517
+- Contract: `0xcd6D4333BcB56c226192a478dA2d9261FdA78953`
+- Explorer: https://explorer.svpchain.com/address/0xcd6D4333BcB56c226192a478dA2d9261FdA78953
+- Source verification: Exact Match
+- Release status: Testnet Release Candidate
+
+The deployed contract is provided as testnet evidence for reviewer verification. Exact-match source verification and successful testnet execution do not constitute an independent security audit.
